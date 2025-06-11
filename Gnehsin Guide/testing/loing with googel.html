@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google OAuth Login</title>
+    
+ <!-- Load Google Identity Services -->
+ <script async='async' defer='defer' src='https://accounts.google.com/gsi/client'/>
+    
+ <style>
+     body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+     .login-container { max-width: 400px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; }
+     .logout-btn { display: none; background: red; color: white; padding: 10px; border: none; cursor: pointer; }
+ </style>
+
+</head>
+<body>
+
+    <h1>Google OAuth Login</h1>
+
+    <!-- Google Sign-In Button -->
+    <div id="g_id_onload"
+        data-client_id="699974220615-m5jrjbej1l10gbgcsgo7b7m90matina3.apps.googleusercontent.com"
+        data-callback="handleCredentialResponse"
+        data-auto_prompt="false"
+        data-ux_mode="popup"> <!-- 💡 Uses `popup` instead of `redirect` -->
+    </div>
+
+    <div class="g_id_signin" data-type="standard"></div>
+
+    <p id="user-info"></p>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+
+
+    <script>
+        function handleCredentialResponse(response) {
+                console.log(&quot;Google Token:&quot;, response.credential);
+    
+                // Decode JWT Token (optional)
+                const user = parseJwt(response.credential);
+                console.log(&quot;User Info:&quot;, user);
+    
+                // Show user info
+                document.getElementById(&quot;user-info&quot;).innerHTML = `
+                    <strong>Welcome, ${user.name}!</strong><br/>
+                    <img src='${user.picture}' width='100'/><br/>
+                    Email: ${user.email}
+                `;
+    
+                // Show logout button
+                document.querySelector(&#39;.logout-btn&#39;).style.display = &#39;inline-block&#39;;
+        
+            }
+    
+            function parseJwt(token) {
+                let base64Url = token.split(&#39;.&#39;)[1];
+                let base64 = base64Url.replace(/-/g, &#39;+&#39;).replace(/_/g, &#39;/&#39;);
+                return JSON.parse(atob(base64));
+            }
+    
+            function logout() {
+                google.accounts.id.disableAutoSelect();
+                document.getElementById(&quot;user-info&quot;).innerHTML = &quot;&quot;;
+                document.querySelector(&#39;.logout-btn&#39;).style.display = &#39;none&#39;;
+            }
+    
+        window.addEventListener(&quot;message&quot;, (event) =&gt; {
+        console.log(&quot;Received message:&quot;, event.data);
+    });
+    
+       
+    
+    
+        window.addEventListener(&quot;message&quot;, (event) =&gt; {
+        // Security check: Only accept messages from trusted sources
+        if (event.origin !== &quot;https://f2p-genshin-impact-guide.blogspot.com&quot;) return;
+    
+        console.log(&quot;Received message:&quot;, event.data);
+    });
+    
+    
+       
+    
+        </script>
+
+</body>
+</html>

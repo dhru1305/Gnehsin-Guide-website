@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Characters</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <div class="logo">
+            <img src="genshin-logo.png" alt="Genshin Logo">
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="#">News</a>
+            <a href="#">Explore</a>
+        </div>
+        <button class="download-btn">Download</button>
+    </nav>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <button id="showAllBtn" class="show-all-btn">Show All Characters</button>
+
+        <div class="element-filter">
+            <button class="element-btn" data-element="Anemo">Anemo</button>
+            <button class="element-btn" data-element="Pyro">Pyro</button>
+            <button class="element-btn" data-element="Hydro">Hydro</button>
+            <button class="element-btn" data-element="Electro">Electro</button>
+            <button class="element-btn" data-element="Dendro">Dendro</button>
+            <button class="element-btn" data-element="Cryo">Cryo</button>
+            <button class="element-btn" data-element="Geo">Geo</button>
+        </div>
+
+        <select id="sortDropdown" class="sort-dropdown">
+            <option value="default">Sort By default</option>
+            <option value="rarity">Sort by Rarity</option>
+            <option value="name">Sort Alphabetically</option>
+        </select>
+    </aside>
+
+    <!-- Character Display Section -->
+    <main class="character-overview">
+        <div class="background-overlay"></div>
+        <div class="character-selection">
+            <!-- Characters will be added dynamically using JavaScript -->
+        </div>
+    </main>
+
+    <script src="main.js"></script>
+</body>
+</html>
